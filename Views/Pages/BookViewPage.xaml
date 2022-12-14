@@ -33,7 +33,6 @@
                         />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            
         </ui:VirtualizingGridView>
 
         <ui:ProgressRing Margin="340,0,400,195" 
