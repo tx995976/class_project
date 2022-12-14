@@ -22,6 +22,9 @@ namespace book_manager.ViewModels
         [RelayCommand]
         private void OnCounterIncrement() {
             Counter++;
+            //for testing
+            //Helpers.dbhelper.table_test();
         }
+
     }
 }

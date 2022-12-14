@@ -5,6 +5,7 @@ namespace book_manager.Models;
 [SugarTable("Borrower")]
 public class Borrower
 {
+
     [SugarColumn(IsPrimaryKey =true)]
     public int id { get; set; }  //学号
 
@@ -25,6 +26,7 @@ public class Borrower
 
     [SugarColumn]
     public bool Isgraduate { get; set; } //
+
 }
 
 [SugarTable("User")]
@@ -34,9 +36,21 @@ public class User
     public int id { get; set; }  //学号
 
     [SugarColumn(IsPrimaryKey =true)]
-    public string Account { get; set;} 
+    public string? Account { get; set;} 
 
     [SugarColumn(IsNullable =false)]
-    public string Password { get; set;} 
+    public string? Password { get; set;} 
+
+    [SugarColumn(IsNullable =false)]
+    public userType accountType { get; set;}
+
+    public enum userType{
+        normal,
+        book_manager,
+        system_manager
+    }
+
+    [Navigate(NavigateType.OneToOne,nameof(id))]
+    public Borrower? student { get; set; } 
 
 }

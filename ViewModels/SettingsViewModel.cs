@@ -19,7 +19,7 @@ namespace book_manager.ViewModels
         public void OnNavigatedTo()
         {
             if (!_isInitialized)
-                InitializeViewModel();
+                InitializeViewModel();  
         }
 
         public void OnNavigatedFrom()

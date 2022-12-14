@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.Mvvm.Services;
 
+
 namespace book_manager
 {
     /// <summary>
@@ -42,9 +43,17 @@ namespace book_manager
                 // Service containing navigation, same as INavigationWindow... but without window
                 services.AddSingleton<INavigationService, NavigationService>();
 
+                //
+                services.AddSingleton<UserService>();
+                services.AddSingleton<BookService>();
+
                 // Main window with navigation
                 services.AddScoped<INavigationWindow, Views.Windows.MainWindow>();
                 services.AddScoped<ViewModels.MainWindowViewModel>();
+
+                //other windows
+                services.AddScoped<Views.Windows.UserLoginWindow>();
+                services.AddScoped<ViewModels.UserLoginViewModel>();
 
                 // Views and ViewModels
                 services.AddScoped<Views.Pages.DashboardPage>();
@@ -53,6 +62,8 @@ namespace book_manager
                 services.AddScoped<ViewModels.DataViewModel>();
                 services.AddScoped<Views.Pages.SettingsPage>();
                 services.AddScoped<ViewModels.SettingsViewModel>();
+                services.AddScoped<Views.Pages.BookViewPage>();
+                services.AddScoped<ViewModels.BookViewViewModel>();
 
 
                 // Configuration
