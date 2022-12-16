@@ -8,27 +8,20 @@ public class Title
 {
 
     [SugarColumn(IsPrimaryKey = true)]
-    public string? isbn { get; set; }
+    public long isbn { get; set; }
     
-    [SugarColumn]
     public string? name { get; set; }
 
-    [SugarColumn]
     public string? description { get; set; }
 
-    [SugarColumn]
     public string? author { get; set; }
 
-    [SugarColumn]
     public double price { get; set; }
 
-    [SugarColumn]
     public int total_num { get; set; }
 
-    [SugarColumn]
     public int last_num { get; set; }
 
-    [SugarColumn]
     public string? type { get; set; }
 
     [Navigate(NavigateType.OneToMany,nameof(isbn),nameof(item.isbn))]
@@ -40,20 +33,18 @@ public class Title
 public class item
 {
 
-    [SugarColumn(IsPrimaryKey = true,IsIdentity =true)]
-    public int item_id { get; set; }
+    [SugarColumn(IsPrimaryKey = true)]
+    public long item_id { get; set; }
 
-    [SugarColumn]
-    public string? isbn { get; set; }
+    public long isbn { get; set; }
 
-    [SugarColumn]
-    public int loan_id { get; set;}
+    public long loan_id { get; set;}
 
-    [SugarColumn]
-    public int lose_id { get; set;}
+    public long lose_id { get; set;}
 
-    [SugarColumn]
-    public int reservation_id { get; set;}
+    public long reservation_id { get; set;}
+
+    public bool is_free { get; set; }
 
     #region fk
 
@@ -65,6 +56,9 @@ public class item
 
     [Navigate(NavigateType.OneToOne, nameof(reservation_id))]
     public info_reservation? reservation{ get; set;}
+
+    [Navigate(NavigateType.OneToOne, nameof(isbn))]
+    public Title? title { get; set;}
 
     #endregion
 }

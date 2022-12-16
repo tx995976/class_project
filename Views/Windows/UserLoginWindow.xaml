@@ -21,13 +21,13 @@
             Text="{Binding ViewModel.Account, Mode=TwoWay}" 
             VerticalAlignment="Top" 
             Width="270" Height="40" MinWidth="270" Cursor="IBeam"/>
-        <AccessText Text="密码" Margin="90,158,280,263"/>
+        <AccessText Text="密码" Margin="90,158,280,263" Cursor="IBeam"/>
         <ui:PasswordBox 
             HorizontalAlignment="Center" 
             Margin="0,178,0,0" 
             TextWrapping="Wrap" 
-            Text="{Binding ViewModel.Password, Mode=TwoWay}"
-            VerticalAlignment="Top" Width="272" Height="40" MinWidth="270"/>
+            Password="{Binding ViewModel.Password, Mode=OneWayToSource}"
+            VerticalAlignment="Top" Width="272" Height="40" MinWidth="270" Cursor="IBeam" />
         <ui:Button 
             Content="登录" Margin="105,281,0,0" 
             VerticalAlignment="Top" 

@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace book_manager.ViewModels;
 
-public partial class BookViewViewModel : ObservableObject, INavigationAware
+public partial class BookViewViewModel :ObservableObject, INavigationAware
 {
     [ObservableProperty]
     private IEnumerable<Models.Title>? _book_result;
@@ -20,31 +20,31 @@ public partial class BookViewViewModel : ObservableObject, INavigationAware
 
     [ObservableProperty]
     private Visibility _process_visible;
-    
+
     #endregion
 
-    private ISugarQueryable<Models.Title>? book_all {get; set; }
-    private ISugarQueryable<Models.Title>? book_res {get; set; }
+    private ISugarQueryable<Models.Title>? book_all { get; set; }
+    private ISugarQueryable<Models.Title>? book_res { get; set; }
 
     public int pagesize = 20;
 
 
-    public BookViewViewModel(){
+    public BookViewViewModel() {
         book_all = App.GetService<Services.BookService>().get_book_titles();
     }
 
-    async public void OnNavigatedTo(){
+    async public void OnNavigatedTo() {
         Page_now = 1;
         await flush_book();
     }
 
-    public void OnNavigatedFrom(){
+    public void OnNavigatedFrom() {
 
     }
 
-    async public Task flush_book(){
+    async public Task flush_book() {
         Process_visible = Visibility.Visible;
-        Book_result = await book_all!.ToPageListAsync(Page_now,pagesize);
+        Book_result = await book_all!.ToPageListAsync(Page_now, pagesize);
         Process_visible = Visibility.Collapsed;
     }
 

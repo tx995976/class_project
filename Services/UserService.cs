@@ -14,7 +14,7 @@ public partial class UserService{
         
         if(res == null)
             return -1;
-        else if(password != res.Password)
+        else if(!password!.Equals(res.Password))
             return -2;
         
         currentUser = res;
@@ -27,7 +27,8 @@ public partial class UserService{
         flush_user?.Invoke(currentUser);
     }
     
-    public Action<User?> flush_user;
+    //triggered when user login
+    public Action<User?>? flush_user;
 
 
 }

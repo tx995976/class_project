@@ -13,9 +13,11 @@ public class dbhelper
     },
     (db) =>
     {
-
+        SnowFlakeSingle.WorkId = 114514;
 
     });
+
+
 
 
     public static void table_test(){

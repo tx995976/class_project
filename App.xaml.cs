@@ -46,6 +46,7 @@ namespace book_manager
                 //
                 services.AddSingleton<UserService>();
                 services.AddSingleton<BookService>();
+                services.AddSingleton<UserInfoService>();
 
                 // Main window with navigation
                 services.AddScoped<INavigationWindow, Views.Windows.MainWindow>();
