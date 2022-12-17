@@ -21,6 +21,7 @@ public class Borrower
 
     public bool Isgraduate { get; set; } //
 
+
 }
 
 [SugarTable("User")]

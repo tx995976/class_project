@@ -43,6 +43,8 @@ namespace book_manager.ViewModels
 
         #endregion
 
+        #region view_generate
+
         private void InitializeViewModel()
         {
             ApplicationTitle = "book_manager";
@@ -96,6 +98,10 @@ namespace book_manager.ViewModels
             
         }
 
+        #endregion
+
+        #region login_method
+
         [RelayCommand]
         private void OnshowLoginWindow(){
             App.GetService<UserLoginWindow>().Show();
@@ -119,6 +125,7 @@ namespace book_manager.ViewModels
             }
         }
 
+        #endregion
 
     }
 }

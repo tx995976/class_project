@@ -39,6 +39,8 @@ namespace book_manager.Views.Windows
             e.Cancel = true;
         }
 
+        
+
     }
 }
 

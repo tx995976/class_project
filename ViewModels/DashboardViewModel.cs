@@ -23,7 +23,7 @@ namespace book_manager.ViewModels
         private void OnCounterIncrement() {
             Counter++;
             //for testing
-            //Helpers.dbhelper.table_test();
+            Helpers.dbhelper.table_test();
         }
 
     }

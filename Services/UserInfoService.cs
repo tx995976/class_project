@@ -6,36 +6,43 @@ using book_manager.Models;
 using book_manager.Helpers;
 
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace book_manager.Services;
 
 public partial class UserInfoService
 {
+    public User? currentUser { get; set; }
+
+    public UserInfoService() {
+        App.GetService<UserService>().flush_user += user_change;
+    }
+
+    async private void user_change(User? user) {
+        currentUser = user;
+        if(user == null)
+            return;
+
+        switch (user!.accountType) {
+            case User.userType.normal:
+                await Task.Run(() => normal_user_flush());
+                break;
+            case User.userType.book_manager:
+                await Task.Run(() => book_user_flush());
+                break;
+            case User.userType.system_manager:
+                await Task.Run(() => admin_user_flush());
+                break;
+        }
+    }
 
     #region normal_user_info
-
-    public User? currentUser { get; set; }
 
     public List<info_loan>? user_loans { get; set; }
     public List<info_lose>? user_loses { get; set; }
     public List<info_reservation>? user_reservations { get; set; }
 
-    #endregion
-
-    public UserInfoService(){
-        App.GetService<UserService>().flush_user += user_change;
-
-
-    }
-
-    private void user_change(User? user) => 
-        currentUser = user;
-
-
-    async public void user_flush(){
-        if(currentUser == null || currentUser.accountType != User.userType.normal)
-            return;
-
+    async public void normal_user_flush() {
         user_loans = await dbhelper.Db.Queryable<info_loan>()
                     .Where(info => info.id_borrower == currentUser!.id && (!info.is_complete))
                     .ToListAsync();
@@ -48,6 +55,32 @@ public partial class UserInfoService
                     .Where(info => info.id_borrower == currentUser!.id && (!info.is_complete))
                     .ToListAsync();
     }
+    #endregion
+
+    #region book_manager_info
+
+    public List<waiting_solve>? confims { get; set; }
+
+    async public void book_user_flush() {
+        confims = await dbhelper.Db.Queryable<waiting_solve>()
+                    .Where(x => !x.is_complete)
+                    .ToListAsync();
+    }
+
+    #endregion
+
+    #region admin_user_info
+
+    public List<User>? users { get; set; }
+
+    async public void admin_user_flush() {
+        users = await dbhelper.Db.Queryable<User>()
+                .Where(x => x.accountType != User.userType.system_manager)
+                .ToListAsync();
+
+    }
+
+    #endregion
 
 
 

@@ -34,6 +34,8 @@ public class dbhelper
         Db.CodeFirst.InitTables<Models.info_loan>();
         Db.CodeFirst.InitTables<Models.info_lose>();
         Db.CodeFirst.InitTables<Models.info_reservation>();
+        Db.CodeFirst.InitTables<Models.waiting_solve>();
+
     }
 }
 

@@ -12,6 +12,21 @@ public partial class BookdetailViewModel : ObservableObject
 {
     public Views.Windows.BookdetailWindow? window { get; set;}
 
+    #region info_for_book
+
+    [ObservableProperty]
+    public bool _canreserve;
+
+    [ObservableProperty]
+    public int _last_num;
+
+    
+
+
+
+    #endregion
+    
+
 
 
 }

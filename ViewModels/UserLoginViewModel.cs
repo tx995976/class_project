@@ -29,10 +29,17 @@ public partial class UserLoginViewModel :ObservableObject
         //Console.WriteLine($"name:{_account},password:{_password}");
         var res = App.GetService<UserService>().login(Account, Password);
         if(res == 0)
-            window?.Hide();
+            window!.Hide();
         else{
             Log = res == -1 ? "no user" : "incorrect password";
         }
+    }
+
+    [RelayCommand]
+    private void Onlogoutbutton() {
+        var userService = App.GetService<UserService>();
+        userService.logout();
+        window!.Hide();
     }
 
 

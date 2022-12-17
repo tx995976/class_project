@@ -7,14 +7,16 @@ namespace book_manager.Models;
 public class info_loan
 {
     public info_loan() {}
-    public info_loan(User user, long item, DateTime end) {
+    public info_loan(int user_id, long item, DateTime end) {
         id_item = item;
         loan_date = DateTime.Now;
         end_date = end;
-        id_borrower = user.id;
+        id_borrower = user_id;
         ext_num = 0;
         is_complete = false;
     }
+
+
 
     [SugarColumn(IsPrimaryKey = true)]
     public long loan_id { get; set; }
@@ -40,9 +42,9 @@ public class info_loan
 public class info_lose
 {
     public info_lose() { }
-    public info_lose(User user, long item) {
+    public info_lose(int user_id, long item) {
         id_item = item;
-        id_borrower = user.id;
+        id_borrower = user_id;
         is_complete = false;
         lose_date = DateTime.Now;
     }
@@ -64,9 +66,9 @@ public class info_lose
 public class info_reservation
 {
     public info_reservation() { }
-    public info_reservation(User user, long item) {
+    public info_reservation(int user_id, long item) {
         id_item = item;
-        id_borrower = user.id;
+        id_borrower = user_id;
         reser_date = DateTime.Now;
         is_complete = false;
     }
@@ -90,8 +92,8 @@ public class info_reservation
 public class waiting_solve
 {
     public waiting_solve(){}
-    public waiting_solve(User user, long item,solve_type _type){
-        id_borrower = user.id;
+    public waiting_solve(int user_id, long item,solve_type _type){
+        id_borrower = user_id;
         id_item = item;
         _type = type;
         is_complete = false;
