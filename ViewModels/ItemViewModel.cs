@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using book_manager.Views.Windows;
+using book_manager.Services;
 
 namespace book_manager.ViewModels;
 
@@ -18,9 +19,7 @@ public partial class ItemViewModel :ObservableObject , INavigationAware
     }
 
     async public void OnNavigatedTo() {
-        Page_now = 1;
         await Task.Run(() => flush_item());
-        Page_str = "当前第1页"; 
     }
 
     public void OnNavigatedFrom() {}
@@ -29,38 +28,10 @@ public partial class ItemViewModel :ObservableObject , INavigationAware
     [ObservableProperty]
     public IEnumerable<Models.item>? _items;
 
-    [ObservableProperty]
-    private int _page_now;
-
-
     private ISugarQueryable<Models.item>? item_query;
 
     async public Task flush_item() {
-        Items = await item_query!.ToPageListAsync(Page_now,20);
-    }
-
-    #endregion
-
-    #region  page
-    [ObservableProperty]
-    private string? _page_str = "当前第1页";
-
-    [RelayCommand]
-    private void Prepage()
-    {
-        if (Page_now == 1)
-            return;
-        --Page_now;
-        Page_str = $"当前第{Page_now}页";
-        Task.Run(() => flush_item());
-    }
-
-    [RelayCommand]
-    private void Nextpage()
-    {
-        Page_now++;
-        Page_str = $"当前第{Page_now}页";
-        Task.Run(() => flush_item());
+        Items = await item_query!.ToListAsync();
     }
 
     #endregion
@@ -70,6 +41,13 @@ public partial class ItemViewModel :ObservableObject , INavigationAware
     [RelayCommand]
     private void Onadditem(){
         App.GetService<ItemAddWindow>().Show();
+    }
+
+    [RelayCommand]
+    async private void Onremoveitem(object item_id){
+        var Services = App.GetService<BookService>();
+        Services.delete_item((long)item_id);
+        await Task.Run(() => flush_item());
     }
 
 

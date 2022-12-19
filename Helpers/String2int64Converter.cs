@@ -62,3 +62,20 @@ internal class item_statsConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+internal class itemDelConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var item = value as Models.item;
+        if(item!.is_free)
+            return true;
+        return false;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+

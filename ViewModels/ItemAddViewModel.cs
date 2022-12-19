@@ -54,6 +54,7 @@ public partial class ItemAddViewModel : ObservableObject
             Ititle = title;
         }
         else{
+            Ititle = new Title();
             Check_res = "无图书介绍,请手动添加";
             Need_info = false;
         }
@@ -61,6 +62,10 @@ public partial class ItemAddViewModel : ObservableObject
 
     [RelayCommand]
     private void New_info_confim(){
+        if(Ititle!.name == null){
+            Check_res = "请输入完整信息";
+            return;
+        }
         var bookservice = App.GetService<BookService>();
         if(Need_info == false){
             bookservice.add_title(Ititle!);
@@ -77,11 +82,7 @@ public partial class ItemAddViewModel : ObservableObject
         Add_isbn = 0;
         Check_res = "";
         New_snowid = 0;
+        Need_info = true;
+        Once_end = true;
     }
-
-
-
-
-
-
 }

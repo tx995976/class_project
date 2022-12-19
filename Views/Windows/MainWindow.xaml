@@ -95,6 +95,7 @@
                     FocusOnLeftClick="True"
                     Icon="pack://application:,,,/Assets/applicationIcon-256.png"
                     MenuOnRightClick="True"
+                    
                     TooltipText="book_manager">
                     <ui:NotifyIcon.Menu>
                         <ContextMenu>
