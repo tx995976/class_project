@@ -6,10 +6,56 @@
         xmlns:local="clr-namespace:book_manager.Views.Windows"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
-        
+        d:DataContext ="{d:DesignInstance local:BookdetailWindow, IsDesignTimeCreatable=False}"
+        ExtendsContentIntoTitleBar="True"
         mc:Ignorable="d"
-        Title="BookdetailWindow" Height="450" Width="800">
-    <Grid>
+        Title="BookdetailWindow" 
+        Height="450" Width="800">
         
+    <Grid>
+        <ui:TitleBar 
+            ShowMinimize="False"
+            ShowMaximize="False"
+            Title="detail"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" 
+                        Margin="50,0,0,50"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding ViewModel.Ctitle.name, Mode=OneWay}" FontSize="16"/>
+                <TextBlock Text="{Binding ViewModel.Ctitle.author, Mode=OneWay}" FontSize="12"/>
+            </StackPanel>
+
+            <ui:Button Grid.Row="0" Grid.Column="1" 
+                       Width="100" Height="60"
+                       IsEnabled="{Binding ViewModel.Canreserve, Mode=OneWay}"
+                       Content="预定" FontSize="14"
+                       Background="#FF74ACE9"
+                       HorizontalAlignment="Center" 
+                       Icon="BookAdd20"/>
+            
+            <TextBlock Grid.Row="0" Grid.Column="1" 
+                       VerticalAlignment="Bottom"
+                       Margin="150,0,10,49"
+                       Text="{Binding ViewModel.Num_detail, Mode=OneWay}" />
+
+            <ui:TextBox Grid.Row="1" Grid.ColumnSpan="2" 
+                        IsReadOnly="True"
+                        ClearButtonEnabled="False"
+                        Text="{Binding ViewModel.Description, Mode=OneWay}"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch" Cursor="IBeam"/>
+
+        </Grid>
     </Grid>
 </ui:UiWindow>

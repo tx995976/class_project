@@ -40,6 +40,14 @@ public partial class BookService
         return res;
     }
 
+    public ISugarQueryable<item> get_items() =>
+        dbhelper.Db.Queryable<item>().Includes(x => x.title);
+
+    public ISugarQueryable<item> search_items(string word) =>
+        dbhelper.Db.Queryable<item>().Includes(x => x.title)
+                                    .Where(x => x.title!.name!.Contains(word));
+
+
     public Title? get_title(long isbn) =>
         dbhelper.Db.Queryable<Title>().InSingle(isbn);
 
@@ -97,7 +105,16 @@ public partial class BookService
     }
 
 
-    public void book_return(long item_id){
+    
+    #endregion
+
+    #region book_actions_manager
+
+     /*
+        @insert loan_info
+        @update item,title
+    */
+    public void confim_return(long item_id){
         var iuser = App.GetService<UserInfoService>();
         var db = dbhelper.Db;
 
@@ -108,17 +125,8 @@ public partial class BookService
         item.loan!.is_complete = true;
 
         db.UpdateNav(item).Include(x => x.loan).ExecuteCommand();
-
     }
-    
-    #endregion
 
-    #region book_actions_manager
-
-     /*
-        @insert loan_info
-        @update item,title
-    */
     public void confim_loan(long solve_id,DateTime end_date) {
         var iuser = App.GetService<UserInfoService>();
         var db = dbhelper.Db;
@@ -152,13 +160,14 @@ public partial class BookService
     public void update_title(Title book) =>
         dbhelper.Db.Updateable(book).ExecuteCommand();
     
-    public void add_item(item new_item){
-        var res = dbhelper.Db.Insertable(new_item).ExecuteCommand();
+    public long add_item(item new_item){
+        var res = dbhelper.Db.Insertable(new_item).ExecuteReturnSnowflakeId();
 
         var title = dbhelper.Db.Queryable<Title>().InSingle(new_item.isbn);
         title.total_num += 1;
         title.last_num += 1;
         dbhelper.Db.Updateable(title).ExecuteCommand();
+        return res;
     }
 
     public void delete_item(long item_id){
@@ -168,7 +177,6 @@ public partial class BookService
         title.last_num -= 1;
         title.total_num -= 1;
         dbhelper.Db.Updateable(title).ExecuteCommand();
-
         dbhelper.Db.Deleteable(item).ExecuteCommand();
     }
   

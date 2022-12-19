@@ -2,9 +2,6 @@
 
 namespace book_manager.Views.Pages
 {
-    /// <summary>
-    /// BookViewPage.xaml 的交互逻辑
-    /// </summary>
     public partial class BookViewPage : INavigableView<ViewModels.BookViewViewModel>
     {
         public ViewModels.BookViewViewModel ViewModel {get;}

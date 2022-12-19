@@ -1,0 +1,111 @@
+﻿<ui:UiWindow 
+    x:Class="book_manager.Views.Windows.ItemAddWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:book_manager.Views.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+    xmlns:helper="clr-namespace:book_manager.Helpers"
+    d:DataContext ="{d:DesignInstance local:ItemAddWindow, IsDesignTimeCreatable=False}"
+    ExtendsContentIntoTitleBar="True"
+    mc:Ignorable="d"
+    Title="ItemUpdateWindow" 
+    Height="450" Width="600">
+    <ui:UiWindow.Resources>
+        <helper:Int2str x:Key="int2str"/>
+        <helper:double2str x:Key="ft2str"/>
+    </ui:UiWindow.Resources>
+        <Grid>
+            <ui:TitleBar 
+                ShowMinimize="False"
+                ShowMaximize="False"
+                Height="Auto"
+                Title="update"/>
+            <Grid  Margin="100,50,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600" />
+                </Grid.ColumnDefinitions>
+                <StackPanel 
+                    VerticalAlignment="Top"
+                    Orientation="Vertical"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                    <StackPanel Orientation="Horizontal"  Margin="0,5">
+                            <TextBlock Text="isbn" FontSize="14"  MinWidth="60" VerticalAlignment="Center"/>
+                            <ui:TextBox Width="300" 
+                                        Text="{Binding ViewModel.Add_isbn,Mode=TwoWay,Converter={StaticResource int2str}}"/>
+                            <ui:Button Icon="ArrowClockwise24" Margin="20,5" Command="{Binding ViewModel.Check_titleCommand}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="书名" VerticalAlignment="Center" MinWidth="60"/>
+                    <ui:TextBox Width="300"
+                                Text="{Binding ViewModel.Ititle.name, Mode=TwoWay}"
+                                IsReadOnly="{Binding ViewModel.Need_info}"
+                                ClearButtonEnabled="False" />
+                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="作者"
+                                VerticalAlignment="Center"
+                                MinWidth="60" />
+                    <ui:TextBox Width="300"
+                                Text="{Binding ViewModel.Ititle.author, Mode=TwoWay}"
+                                IsReadOnly="{Binding ViewModel.Need_info}" 
+                                    ClearButtonEnabled="False"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="定价"
+                                VerticalAlignment="Center"
+                                MinWidth="60" />
+                    <ui:TextBox Width="300"
+                                Text="{Binding ViewModel.Ititle.price, Mode=TwoWay, Converter={StaticResource ft2str}}"
+                                IsReadOnly="{Binding ViewModel.Need_info}"
+                                ClearButtonEnabled="False" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="简介"
+                                VerticalAlignment="Center"
+                                MinWidth="60" />
+                    <ui:TextBox Width="300"
+                                Text="{Binding ViewModel.Ititle.description, Mode=TwoWay}"
+                                IsReadOnly="{Binding ViewModel.Need_info}"
+                                ClearButtonEnabled="False" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,5">
+                        <TextBlock Text="类型"
+                                VerticalAlignment="Center"
+                                MinWidth="60" />
+                    <ui:TextBox Width="300"
+                                Text="{Binding ViewModel.Ititle.type, Mode=TwoWay}"
+                                IsReadOnly="{Binding ViewModel.Need_info}"
+                                ClearButtonEnabled="False" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,5">
+                        <TextBlock Text="物品id"
+                                VerticalAlignment="Center"
+                                MinWidth="60" />
+                    <ui:TextBox Width="300"
+                                Text="{Binding ViewModel.New_snowid, Mode=OneWay, Converter={StaticResource int2str}}"
+                                IsReadOnly="True"
+                                ClearButtonEnabled="False" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10">
+                        <ui:Button Margin="30,0" Height="30" Width="80" 
+                                   Icon="AddCircle24" 
+                                   Command="{Binding ViewModel.New_info_confimCommand}"
+                                   IsEnabled="{Binding ViewModel.Once_end}"
+                                   Content="添加" />
+                        <ui:Button Margin="90,0" Height="30" Width="60"/>
+                    </StackPanel>
+                    <TextBlock Margin="0,5" 
+                               Text="{Binding ViewModel.Check_res, Mode=OneWay}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+</ui:UiWindow>

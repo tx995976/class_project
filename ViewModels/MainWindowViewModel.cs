@@ -9,6 +9,8 @@ using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
+using book_manager.Services;
+
 namespace book_manager.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
@@ -34,6 +36,8 @@ namespace book_manager.ViewModels
 
             //binding callback
             App.GetService<UserService>().flush_user += flush_panel;
+            App.GetService<BookService>();
+            App.GetService<UserInfoService>();
         }
 
         #region book_attributes
@@ -71,6 +75,13 @@ namespace book_manager.ViewModels
                     PageTag = "book",
                     Icon = SymbolRegular.Book24,
                     PageType = typeof(Views.Pages.BookViewPage)
+                },
+                new NavigationItem()
+                {
+                    Content = "items",
+                    PageTag = "item",
+                    Icon = SymbolRegular.Book24,
+                    PageType = typeof(Views.Pages.ItemPage)
                 }
             };
 

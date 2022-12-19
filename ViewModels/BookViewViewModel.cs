@@ -17,6 +17,7 @@ public partial class BookViewViewModel :ObservableObject, INavigationAware
     async public void OnNavigatedTo() {
         Page_now = 1;
         await Task.Run(() => flush_book());
+        Page_str = "当前第1页"; 
     }
 
     public void OnNavigatedFrom() {
@@ -30,6 +31,9 @@ public partial class BookViewViewModel :ObservableObject, INavigationAware
 
     [ObservableProperty]
     private int _page_now;
+
+    [ObservableProperty]
+    private string? _page_str = "当前第1页";
 
     public static int pagesize = 20;
     public int total_books;
@@ -48,6 +52,7 @@ public partial class BookViewViewModel :ObservableObject, INavigationAware
         if (Page_now == 1)
             return;
         --Page_now;
+        Page_str = $"当前第{Page_now}页";
         Task.Run(() => flush_book());
     }
 
@@ -55,18 +60,18 @@ public partial class BookViewViewModel :ObservableObject, INavigationAware
     private void Nextpage()
     {
         Page_now++;
+        Page_str = $"当前第{Page_now}页";
         Task.Run(() => flush_book());
     }
 
     [RelayCommand]
-    private void Showbook_detail(){
-        
-
-        App.GetService<Views.Windows.BookdetailWindow>().Show();
+    private void Showbook_detail(object para){
+        var detail_window = App.GetService<Views.Windows.BookdetailWindow>();
+        detail_window.ViewModel.flush_detail((long)para);
+        detail_window.Show();
     }
 
     #endregion
-
 
     #region loadprocessor
 
@@ -75,7 +80,10 @@ public partial class BookViewViewModel :ObservableObject, INavigationAware
 
     #endregion
 
+    #region search_book_titles
 
+
+    #endregion
 
 
 

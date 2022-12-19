@@ -6,6 +6,8 @@ using System;
 using book_manager.Models;
 using book_manager.Helpers;
 
+namespace book_manager.Services;
+
 public partial class UserService{
 
     public User? currentUser { get; set;}

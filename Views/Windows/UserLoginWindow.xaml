@@ -38,6 +38,8 @@
         <TextBlock Margin="65,243,100,160" 
                    Text="{Binding ViewModel.Log, Mode=OneWay}"
                    Foreground="#FFED5858" />
+        
+
 
     </Grid>
 </ui:UiWindow>

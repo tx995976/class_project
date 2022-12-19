@@ -10,7 +10,13 @@
     <Compile Update="Views\Pages\BookViewPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\ItemPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Windows\BookdetailWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\ItemAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Windows\UserLoginWindow.xaml.cs">
@@ -27,10 +33,16 @@
     <Page Update="Views\Pages\DataPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Pages\ItemPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Windows\BookdetailWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Windows\ItemAddWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Windows\MainWindow.xaml">

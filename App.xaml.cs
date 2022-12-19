@@ -55,6 +55,10 @@ namespace book_manager
                 //other windows
                 services.AddScoped<Views.Windows.UserLoginWindow>();
                 services.AddScoped<ViewModels.UserLoginViewModel>();
+                services.AddScoped<Views.Windows.BookdetailWindow>();
+                services.AddScoped<ViewModels.BookdetailViewModel>();
+                services.AddScoped<Views.Windows.ItemAddWindow>();
+                services.AddScoped<ViewModels.ItemAddViewModel>();
 
                 // Views and ViewModels
                 services.AddScoped<Views.Pages.DashboardPage>();
@@ -65,6 +69,8 @@ namespace book_manager
                 services.AddScoped<ViewModels.SettingsViewModel>();
                 services.AddScoped<Views.Pages.BookViewPage>();
                 services.AddScoped<ViewModels.BookViewViewModel>();
+                services.AddScoped<Views.Pages.ItemPage>();
+                services.AddScoped<ViewModels.ItemViewModel>();
 
 
                 // Configuration

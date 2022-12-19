@@ -19,20 +19,26 @@
             x:Name="virtualizingItemsControl"
             VirtualizingPanel.CacheLengthUnit= "Item"
             ItemsSource="{Binding ViewModel.Book_result}"
-            SpacingMode="None"
+            SpacingMode="BetweenItemsOnly"
+            HorizontalAlignment="Left"
             Orientation="Vertical"
             Width="auto"
             Height="auto"
-            Margin="10,48,10,32">
+            Margin="0,48,0,60">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Title}">
                     <ui:CardAction 
                         Icon="Book20"
-                        Content="{Binding name}"
-                        Height="60"
+                        HorizontalAlignment="Left"
+                        Height="70"
                         MinWidth="{Binding ActualWidth, ElementName=virtualizingItemsControl,Mode=OneWay}"
-                        Command="{Binding DataContext.ViewModel.Showbook_detailCommand, ElementName=uiPage}">
-                        
+                        Command="{Binding DataContext.ViewModel.Showbook_detailCommand, ElementName=uiPage}"
+                        CommandParameter="{Binding isbn}"
+                        >
+                        <StackPanel>
+                            <TextBlock  Text="{Binding name}" FontSize="14"/>
+                            <TextBlock  Text="{Binding description}" FontSize="12"/>
+                        </StackPanel>
                     </ui:CardAction>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -48,6 +54,28 @@
                            MinWidth="500"
                            VerticalAlignment="Top" 
                            Width="591" Cursor="IBeam"/>
+        <ui:Button 
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Margin="0,0,100,0"
+            Content="上一页"
+            Command="{Binding ViewModel.PrepageCommand}"
+            Width="80" Height="40"/>
+
+        <TextBlock Margin="0,0,200,10"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Width="80"
+            FontSize="14"
+            Text="{Binding ViewModel.Page_str}"/>
+
+        <ui:Button 
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Margin="0,0,0,0"
+            Content="下一页" 
+            Command="{Binding ViewModel.NextpageCommand}"
+            Width="80" Height="40"/>
 
 
     </Grid>

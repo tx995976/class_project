@@ -32,6 +32,9 @@ public class Title
 [SugarTable("item")]
 public class item
 {
+    public item(){
+        is_free = true;
+    }
 
     [SugarColumn(IsPrimaryKey = true)]
     public long item_id { get; set; }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.Ui.Common;
+using System.ComponentModel;
 using Wpf.Ui.Controls;
 
 namespace book_manager.Views.Windows
 {
-    /// <summary>
-    /// BookdetailWindow.xaml 的交互逻辑
-    /// </summary>
     public partial class BookdetailWindow : UiWindow
     {
         public ViewModels.BookdetailViewModel ViewModel { get; }
@@ -38,8 +35,6 @@ namespace book_manager.Views.Windows
             Hide();
             e.Cancel = true;
         }
-
-        
 
     }
 }

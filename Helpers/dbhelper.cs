@@ -13,7 +13,7 @@ public class dbhelper
     },
     (db) =>
     {
-        SnowFlakeSingle.WorkId = 114514;
+        SnowFlakeSingle.WorkId = 14;
 
     });
 
