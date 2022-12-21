@@ -102,7 +102,7 @@ public class waiting_solve
     public waiting_solve(int user_id, long item,solve_type _type){
         id_borrower = user_id;
         id_item = item;
-        _type = type;
+        type = _type;
         is_complete = false;
     }
 

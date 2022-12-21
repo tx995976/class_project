@@ -1,0 +1,43 @@
+﻿<ui:UiWindow 
+    x:Class="book_manager.Views.Windows.TimeSelectWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:book_manager.Views.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+    xmlns:helper="clr-namespace:book_manager.Helpers"
+    xmlns:models="clr-namespace:book_manager.Models"
+    d:DataContext ="{d:DesignInstance local:TimeSelectWindow, IsDesignTimeCreatable=False}"
+    ExtendsContentIntoTitleBar="True"
+    mc:Ignorable="d"
+    Title="TimeSelectWindow" 
+    Height="200" Width="400">
+    <Grid>
+        <ui:TitleBar 
+                ShowMinimize="False"
+                ShowMaximize="False"
+                Title="Time"/>
+        <Grid VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <AccessText Text="选择日期" Margin="170,50,0,0"/>
+            <DatePicker x:Name="datePicker" Grid.Row="0" Width="300" VerticalAlignment="Center" 
+                            DisplayDateStart="{Binding ViewModel.Timest}">
+
+            </DatePicker>
+            <ui:Button Content="确定" 
+                           Command="{Binding ViewModel.OnselectendCommand}"
+                           CommandParameter="{Binding SelectedDate, ElementName=datePicker}"
+                           Width="auto"
+                           Icon="Checkmark24"
+                           Margin="100,0,0,50"
+                           Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</ui:UiWindow>

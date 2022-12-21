@@ -1,5 +1,9 @@
 using SqlSugar;
 using System;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.IO;
+
 
 namespace book_manager.Helpers;
 
@@ -7,7 +11,7 @@ public class dbhelper
 {
     public static SqlSugarScope Db = new SqlSugarScope(new ConnectionConfig()
     {
-        ConnectionString = "Server=192.168.41.3;Database=Bookshelf;Uid=tx995975;Pwd=020926",
+        ConnectionString = Configread(),
         DbType = DbType.MySqlConnector,
         IsAutoCloseConnection = true
     },
@@ -16,6 +20,18 @@ public class dbhelper
         SnowFlakeSingle.WorkId = 14;
 
     });
+
+     public static string Configread(){
+        var str = new StreamReader("./Config/db.json");
+        var ini = JsonNode.Parse(str.ReadToEnd());
+        var db_config = ini!["db"]!;
+        string server = (string)db_config["server"]!;
+        string database = (string)db_config["Database"]!;
+        string id = (string)db_config["uid"]!;
+        string passwd = (string)db_config["upass"]!;
+
+        return $"Server={server};Database={database};Uid={id};Pwd={passwd}";
+    }
 
 
 

@@ -59,6 +59,8 @@ namespace book_manager
                 services.AddScoped<ViewModels.BookdetailViewModel>();
                 services.AddScoped<Views.Windows.ItemAddWindow>();
                 services.AddScoped<ViewModels.ItemAddViewModel>();
+                services.AddScoped<Views.Windows.TimeSelectWindow>();
+                services.AddScoped<ViewModels.TimeSelectViewModel>();
 
                 // Views and ViewModels
                 services.AddScoped<Views.Pages.DashboardPage>();

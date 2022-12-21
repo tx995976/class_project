@@ -15,7 +15,6 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
 {
     async public void OnNavigatedTo() {
         await Task.Run(() => flush_info());
-
     }
 
     public void OnNavigatedFrom() {}
@@ -35,7 +34,7 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
 
     async public void flush_info(){
         var service = App.GetService<Services.UserInfoService>();
-        await Task.Run(() => service.book_user_flush());
+        await Task.Run(() => service.normal_user_flush());
         Loans = service.user_loans;
         Loses = service.user_loses;
         Reserv = service.user_reservations;
@@ -44,12 +43,12 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
     #endregion
 
     [RelayCommand]
-    private void OnextCommand(object loan_id){
+    private void Onext(object loan_id){
 
     }
 
     [RelayCommand]
-    private void OnreportloseCommand(object item_id){
+    private void Onreportlose(object item_id){
 
     }
 

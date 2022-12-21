@@ -1,6 +1,6 @@
 {
-    "mariadb": {
-        "server": "localhost",
+    "db": {
+        "server": "192.168.41.3",
         "Database": "Bookshelf",
         "uid" : "tx995975",
         "upass" : "020926"

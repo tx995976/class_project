@@ -61,7 +61,7 @@
         </ui:VirtualizingGridView>
       
         <ui:VirtualizingGridView 
-            Grid.Row="0" Grid.ColumnSpan="2"
+            Grid.Row="1" Grid.ColumnSpan="2"
             x:Name="panelloan"
             VirtualizingPanel.CacheLengthUnit= "Item"
             SpacingMode="BetweenItemsOnly"
@@ -71,7 +71,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:info_loan}">
                     <ui:CardControl 
-                        Icon="BookClock24"
+                        Icon="BookArrowClockwise24"
                         HorizontalAlignment="Left"
                         Height="70"
                         MinWidth="{Binding ActualWidth, ElementName=panelreser,Mode=OneWay}"
@@ -86,12 +86,12 @@
                                 <TextBlock  Text="{Binding end_date}" FontSize="14"/>
                             </StackPanel>
                             <ui:Button Content="延长" 
-                                       Command="{Binding DataContext.ViewModel.OnextCommandCommand,ElementName=uipage, Mode=OneWay}"
+                                       Command="{Binding DataContext.ViewModel.OnextCommand,ElementName=uipage, Mode=OneWay}"
                                        CommandParameter="{Binding loan_id}"
                                        Icon="Timer24"
-                                       Margin="100,0,0,0" Background="#FF74ACE9" />
+                                       Margin="200,0,0,0" Background="#FF74ACE9" />
                             <ui:Button Content="报失" 
-                                       Command="{Binding DataContext.ViewModel.OnextCommandCommand,ElementName=uipage, Mode=OneWay}"
+                                       Command="{Binding DataContext.ViewModel.OnreportloseCommand,ElementName=uipage, Mode=OneWay}"
                                        CommandParameter="{Binding loan_id}"
                                        Icon="DeleteLines20"
                                        Margin="10,0,0,0" Background="#FFE91010" />
@@ -102,17 +102,17 @@
         </ui:VirtualizingGridView>
 
         <ui:VirtualizingGridView 
-            Grid.Row="0" Grid.ColumnSpan="2"
+            Grid.Row="2" Grid.ColumnSpan="2"
             x:Name="panellose"
             VirtualizingPanel.CacheLengthUnit= "Item"
             SpacingMode="BetweenItemsOnly"
             HorizontalAlignment="Stretch"
-            ItemsSource="{Binding ViewModel.Loans}"
+            ItemsSource="{Binding ViewModel.Loses}"
             >
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:info_loan}">
                     <ui:CardControl 
-                        Icon="BookClock24"
+                        Icon="BookQuestionMark24"
                         HorizontalAlignment="Left"
                         Height="70"
                         MinWidth="{Binding ActualWidth, ElementName=panelreser,Mode=OneWay}"
@@ -123,7 +123,7 @@
                                 <TextBlock Text="{Binding id_item}" FontSize="12"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="100">
-                                <TextBlock  Text="到期时间" FontSize="14"/>
+                                <TextBlock  Text="丢失时间" FontSize="14"/>
                                 <TextBlock  Text="{Binding end_date}" FontSize="14"/>
                             </StackPanel>
                         </StackPanel>

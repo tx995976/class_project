@@ -32,6 +32,7 @@ namespace book_manager.Views.Windows
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            ViewModel.Onclose();
             Hide();
             e.Cancel = true;
         }

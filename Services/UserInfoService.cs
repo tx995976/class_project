@@ -74,6 +74,10 @@ public partial class UserInfoService
                     .ToListAsync();
     }
 
+    public async Task<waiting_solve?> get_confimAsync(long solve_id) =>
+        await dbhelper.Db.Queryable<waiting_solve>().InSingleAsync(solve_id);
+
+
     #endregion
 
     #region admin_user_info

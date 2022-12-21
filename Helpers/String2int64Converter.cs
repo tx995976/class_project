@@ -160,6 +160,8 @@ internal class ConfimtypeConverter : IValueConverter
                 return SymbolRegular.BookArrowClockwise24;
             case Models.waiting_solve.solve_type.lose_solve:
                 return SymbolRegular.BookQuestionMark24;
+            case Models.waiting_solve.solve_type.loan_end:
+                return SymbolRegular.ArrowReply24;
         }
         return SymbolRegular.Book24;
     }
@@ -181,6 +183,8 @@ internal class ConfimConverter : IValueConverter
                 return "延长确认";
             case Models.waiting_solve.solve_type.lose_solve:
                 return "丢失处理";
+            case Models.waiting_solve.solve_type.loan_end:
+                return "归还确认";
         }
         return "unknown";
     }

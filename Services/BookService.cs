@@ -95,18 +95,17 @@ public partial class BookService
         var confim = new waiting_solve(user!.id,item_id,waiting_solve.solve_type.lose_solve);
 
         var snowid = db.Insertable(info).ExecuteReturnSnowflakeId();
-        db.Insertable(confim).ExecuteCommand();
 
         item.loan!.is_complete = true;
         item.lose_id = snowid;
         item.loan_id = 0;
 
+        db.Insertable(confim).ExecuteReturnSnowflakeId();
         db.UpdateNav(item).Include(x => x.loan).ExecuteCommand();
     }
 
-
-    
     #endregion
+
 
     #region book_actions_manager
 
@@ -114,17 +113,26 @@ public partial class BookService
         @insert loan_info
         @update item,title
     */
-    public void confim_return(long item_id){
+    public void confim_return(long solve_id){
         var iuser = App.GetService<UserInfoService>();
         var db = dbhelper.Db;
 
-        var item = db.Queryable<item>().Includes(x => x.loan).InSingle(item_id);
+        var confim = db.Queryable<waiting_solve>().InSingle(solve_id);
+        var item = db.Queryable<item>()
+                .Includes(x => x.loan)
+                .Includes(x => x.title)
+                .InSingle(confim.id_item);
 
         item.is_free = true;
         item.loan_id = 0;
         item.loan!.is_complete = true;
 
-        db.UpdateNav(item).Include(x => x.loan).ExecuteCommand();
+        item.title!.last_num += 1;
+
+        confim.is_complete = true;
+        
+        db.UpdateNav(item).Include(x => x.loan).Include(x => x.title).ExecuteCommand();
+        db.Updateable(confim).ExecuteCommand();
     }
 
     public void confim_loan(long solve_id,DateTime end_date) {
@@ -133,16 +141,21 @@ public partial class BookService
 
         //execute
         var confim =  db.Queryable<waiting_solve>().InSingle(solve_id);
-        var user = db.Queryable<User>().Where(x => x.id == confim.id_borrower).Single();
         var item = db.Queryable<item>().Includes(x => x.reservation).InSingle(confim.id_item);
+        var return_confim = new waiting_solve(confim.id_borrower,confim.id_item,waiting_solve.solve_type.loan_end);
 
         var info = new info_loan(confim.id_borrower,confim.id_item,end_date);
         var res = db.Insertable<info_loan>(info).ExecuteReturnSnowflakeId();
+        db.Insertable(return_confim).ExecuteReturnSnowflakeId();
 
         item.loan_id = res;
         item.reservation_id = 0;
         item.reservation!.is_complete = true;
+
+        confim.is_complete = true;
+
         db.UpdateNav(item).Include(x => x.reservation).ExecuteCommand();
+        db.Updateable(confim).ExecuteCommand();
     }
 
     public void confim_lose(){}

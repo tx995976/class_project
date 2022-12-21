@@ -69,6 +69,10 @@ public partial class BookdetailViewModel : ObservableObject
         Reservation_snowid = $"您预约的书本号为: {snowid}";
     }
 
+    public void Onclose(){
+        Reservation_snowid = "";
+        
+    }
 
 
     #endregion

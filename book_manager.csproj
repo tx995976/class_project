@@ -32,4 +32,10 @@
     <Resource Include="Assets\applicationIcon-256.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Config\db.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
