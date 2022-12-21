@@ -36,6 +36,8 @@ public class info_loan
     [Navigate(NavigateType.OneToOne, nameof(id_borrower))]
     public Borrower? student { get; set; }
 
+    [Navigate(NavigateType.OneToOne,nameof(id_item))]
+    public item? item { get; set; }
 }
 
 [SugarTable("info_lose")]
@@ -59,6 +61,9 @@ public class info_lose
     public bool is_complete { get; set; }
 
     public DateTime lose_date { get; set; }
+
+    [Navigate(NavigateType.OneToOne,nameof(id_item))]
+    public item? item { get; set; }
 
 }
 
@@ -85,6 +90,8 @@ public class info_reservation
 
     public bool is_complete { get; set; }
 
+    [Navigate(NavigateType.OneToOne,nameof(id_item))]
+    public item? item { get; set; }
 }
 
 //for book_manager to solve
@@ -103,7 +110,8 @@ public class waiting_solve
     {
         reservation_to_loan,
         lose_solve,
-        ext_loan
+        ext_loan,
+        loan_end
     }
 
     [SugarColumn(IsPrimaryKey = true)]
@@ -116,4 +124,10 @@ public class waiting_solve
     public solve_type type { get; set; }
 
     public bool is_complete { get; set; }
+
+    [Navigate(NavigateType.OneToOne,nameof(id_borrower))]
+    public Borrower? student { get; set; }
+
+    [Navigate(NavigateType.OneToOne,nameof(id_item))]
+    public item? Item { get; set; }
 }

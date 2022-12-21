@@ -10,7 +10,16 @@
     <Compile Update="Views\Pages\BookViewPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\BorrowInfoPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\ConfimPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\ItemPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\UserPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Windows\BookdetailWindow.xaml.cs">
@@ -27,6 +36,12 @@
     <Page Update="Views\Pages\BookViewPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Pages\BorrowInfoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\ConfimPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Pages\DashboardPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -37,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\UserPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Windows\BookdetailWindow.xaml">

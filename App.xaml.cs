@@ -71,6 +71,12 @@ namespace book_manager
                 services.AddScoped<ViewModels.BookViewViewModel>();
                 services.AddScoped<Views.Pages.ItemPage>();
                 services.AddScoped<ViewModels.ItemViewModel>();
+                services.AddScoped<Views.Pages.ConfimPage>();
+                services.AddScoped<ViewModels.ConfimViewModel>();
+                services.AddScoped<Views.Pages.BorrowInfoPage>();
+                services.AddScoped<ViewModels.BorrowInfoViewModel>();
+                services.AddScoped<Views.Pages.UserPage>(); 
+                services.AddScoped<ViewModels.UserViewModel>();
 
 
                 // Configuration

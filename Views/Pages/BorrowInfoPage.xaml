@@ -1,0 +1,137 @@
+﻿<ui:UiPage x:Class="book_manager.Views.Pages.BorrowInfoPage"
+  x:Name="uipage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:book_manager.Views.Pages"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  xmlns:models="clr-namespace:book_manager.Models"
+  xmlns:helper="clr-namespace:book_manager.Helpers"
+  Title="BorrowInfoPage"
+  d:DataContext="{d:DesignInstance local:BorrowInfoPage, IsDesignTimeCreatable=False}"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  d:Background="{DynamicResource ApplicationBackgroundBrush}"
+  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  mc:Ignorable="d">
+    <ui:UiPage.Resources>
+        <helper:info2titleConverter x:Key="info2title"/>
+    </ui:UiPage.Resources>
+  <Grid VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="150" />
+        </Grid.RowDefinitions>
+        
+        <ui:VirtualizingGridView 
+            Grid.Row="0" Grid.ColumnSpan="2"
+            x:Name="panelreser"
+            VirtualizingPanel.CacheLengthUnit= "Item"
+            SpacingMode="BetweenItemsOnly"
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding ViewModel.Reserv}"
+            >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:info_reservation}">
+                    <ui:CardControl 
+                        Icon="BookClock24"
+                        HorizontalAlignment="Left"
+                        Height="70"
+                        MinWidth="{Binding ActualWidth, ElementName=panelreser,Mode=OneWay}"
+                        >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,650,0">
+                            <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="50">
+                                <TextBlock Text="{Binding item, Mode=OneWay, Converter={StaticResource info2title}}" FontSize="14"/>
+                                <TextBlock Text="{Binding id_item}" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="100">
+                                <TextBlock  Text="预约时间" FontSize="14"/>
+                                <TextBlock  Text="{Binding reser_date}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ui:CardControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ui:VirtualizingGridView>
+      
+        <ui:VirtualizingGridView 
+            Grid.Row="0" Grid.ColumnSpan="2"
+            x:Name="panelloan"
+            VirtualizingPanel.CacheLengthUnit= "Item"
+            SpacingMode="BetweenItemsOnly"
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding ViewModel.Loans}"
+            >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:info_loan}">
+                    <ui:CardControl 
+                        Icon="BookClock24"
+                        HorizontalAlignment="Left"
+                        Height="70"
+                        MinWidth="{Binding ActualWidth, ElementName=panelreser,Mode=OneWay}"
+                        >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,650,0">
+                            <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="50">
+                                <TextBlock Text="{Binding item, Mode=OneWay, Converter={StaticResource info2title}}" FontSize="14"/>
+                                <TextBlock Text="{Binding id_item}" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="100">
+                                <TextBlock  Text="到期时间" FontSize="14"/>
+                                <TextBlock  Text="{Binding end_date}" FontSize="14"/>
+                            </StackPanel>
+                            <ui:Button Content="延长" 
+                                       Command="{Binding DataContext.ViewModel.OnextCommandCommand,ElementName=uipage, Mode=OneWay}"
+                                       CommandParameter="{Binding loan_id}"
+                                       Icon="Timer24"
+                                       Margin="100,0,0,0" Background="#FF74ACE9" />
+                            <ui:Button Content="报失" 
+                                       Command="{Binding DataContext.ViewModel.OnextCommandCommand,ElementName=uipage, Mode=OneWay}"
+                                       CommandParameter="{Binding loan_id}"
+                                       Icon="DeleteLines20"
+                                       Margin="10,0,0,0" Background="#FFE91010" />
+                        </StackPanel>
+                    </ui:CardControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ui:VirtualizingGridView>
+
+        <ui:VirtualizingGridView 
+            Grid.Row="0" Grid.ColumnSpan="2"
+            x:Name="panellose"
+            VirtualizingPanel.CacheLengthUnit= "Item"
+            SpacingMode="BetweenItemsOnly"
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding ViewModel.Loans}"
+            >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:info_loan}">
+                    <ui:CardControl 
+                        Icon="BookClock24"
+                        HorizontalAlignment="Left"
+                        Height="70"
+                        MinWidth="{Binding ActualWidth, ElementName=panelreser,Mode=OneWay}"
+                        >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,650,0">
+                            <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="50">
+                                <TextBlock Text="{Binding item, Mode=OneWay, Converter={StaticResource info2title}}" FontSize="14"/>
+                                <TextBlock Text="{Binding id_item}" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="10,0" MinWidth="100">
+                                <TextBlock  Text="到期时间" FontSize="14"/>
+                                <TextBlock  Text="{Binding end_date}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ui:CardControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ui:VirtualizingGridView>
+
+
+    </Grid>
+</ui:UiPage>

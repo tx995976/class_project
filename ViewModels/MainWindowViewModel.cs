@@ -45,6 +45,77 @@ namespace book_manager.ViewModels
         [ObservableProperty]
         private string status_log = "登录";
 
+        ObservableCollection<INavigationControl> items_normal = new ObservableCollection<INavigationControl>
+        {
+            new NavigationItem()
+                {
+                    Content = "Home",
+                    PageTag = "dashboard",
+                    Icon = SymbolRegular.Home24,
+                    PageType = typeof(Views.Pages.DashboardPage)
+                },
+            new NavigationItem()
+                {
+                    Content = "BookShelf",
+                    PageTag = "book",
+                    Icon = SymbolRegular.Book24,
+                    PageType = typeof(Views.Pages.BookViewPage)
+                },
+            new NavigationItem()
+                {
+                    Content = "orders",
+                    PageTag = "order",
+                    Icon = SymbolRegular.Book24,
+                    PageType = typeof(Views.Pages.BorrowInfoPage)
+                }
+
+        };
+
+         ObservableCollection<INavigationControl> items_bookmg = new ObservableCollection<INavigationControl>
+         {
+            new NavigationItem()
+                {
+                    Content = "Home",
+                    PageTag = "dashboard",
+                    Icon = SymbolRegular.Home24,
+                    PageType = typeof(Views.Pages.DashboardPage)
+                },
+            new NavigationItem()
+                {
+                    Content = "items",
+                    PageTag = "item",
+                    Icon = SymbolRegular.Book24,
+                    PageType = typeof(Views.Pages.ItemPage)
+                },
+            new NavigationItem()
+                {
+                    Content = "confim",
+                    PageTag = "confim",
+                    Icon = SymbolRegular.Book24,
+                    PageType = typeof(Views.Pages.ConfimPage)
+                },
+            
+         };
+
+         ObservableCollection<INavigationControl> items_usermg = new ObservableCollection<INavigationControl>
+         {
+            new NavigationItem()
+                {
+                    Content = "Home",
+                    PageTag = "dashboard",
+                    Icon = SymbolRegular.Home24,
+                    PageType = typeof(Views.Pages.DashboardPage)
+                },
+            new NavigationItem()
+                {
+                    Content = "User",
+                    PageTag = "user",
+                    Icon = SymbolRegular.Person24,
+                    PageType = typeof(Views.Pages.UserPage)
+                }
+         };
+
+
         #endregion
 
         #region view_generate
@@ -62,27 +133,7 @@ namespace book_manager.ViewModels
                     Icon = SymbolRegular.Home24,
                     PageType = typeof(Views.Pages.DashboardPage)
                 },
-                new NavigationItem()
-                {
-                    Content = "Data",
-                    PageTag = "data",
-                    Icon = SymbolRegular.DataHistogram24,
-                    PageType = typeof(Views.Pages.DataPage)
-                },
-                new NavigationItem()
-                {
-                    Content = "BookShelf",
-                    PageTag = "book",
-                    Icon = SymbolRegular.Book24,
-                    PageType = typeof(Views.Pages.BookViewPage)
-                },
-                new NavigationItem()
-                {
-                    Content = "items",
-                    PageTag = "item",
-                    Icon = SymbolRegular.Book24,
-                    PageType = typeof(Views.Pages.ItemPage)
-                }
+                
             };
 
             NavigationFooter = new ObservableCollection<INavigationControl>
@@ -119,21 +170,22 @@ namespace book_manager.ViewModels
         }
 
         private void flush_panel(Models.User? user){
-            Status_log = user?.student?.name ?? "登录";
+            Status_log = user?.Account ?? "登录";
 
             //flush_panel
             if(user != null)
                 switch(user.accountType){
                     case Models.User.userType.normal:
+                        NavigationItems = items_normal;
                         break;
                     case Models.User.userType.book_manager:
+                        NavigationItems = items_bookmg;
                         break;
                     case Models.User.userType.system_manager:
+                        NavigationItems = items_usermg;
                         break;
                 }
-            else{
-                
-            }
+            App.GetService<INavigationWindow>().Navigate(typeof(Views.Pages.DashboardPage));
         }
 
         #endregion

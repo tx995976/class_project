@@ -73,7 +73,7 @@ public partial class BookService
         var confim = new waiting_solve(user!.id,res_item.item_id,waiting_solve.solve_type.reservation_to_loan);
 
         var snowid = db.Insertable(info).ExecuteReturnSnowflakeId();
-        db.Insertable(confim).ExecuteCommand();
+        db.Insertable(confim).ExecuteReturnSnowflakeId();
 
         res_item.reservation_id = snowid;
         res_item.is_free = false;

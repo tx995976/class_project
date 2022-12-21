@@ -65,10 +65,10 @@ public partial class BookViewViewModel :ObservableObject, INavigationAware
     }
 
     [RelayCommand]
-    private void Showbook_detail(object para){
+    async private void Showbook_detail(object para){
         var detail_window = App.GetService<Views.Windows.BookdetailWindow>();
-        detail_window.ViewModel.flush_detail((long)para);
         detail_window.Show();
+        await Task.Run(() => detail_window.ViewModel.flush_detail((long)para));
     }
 
     #endregion

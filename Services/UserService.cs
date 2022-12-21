@@ -47,7 +47,9 @@ public partial class UserService{
     #region admin_actions
 
     async public Task<List<User>> get_users() =>
-       await dbhelper.Db.Queryable<User>().ToListAsync();
+       await dbhelper.Db.Queryable<User>()
+                        .Includes(x => x.student)
+                        .ToListAsync();
 
     async public Task<List<User>> get_users(string para) =>
        await dbhelper.Db.Queryable<User>().Where(x => x.Account!.Contains(para)).ToListAsync();

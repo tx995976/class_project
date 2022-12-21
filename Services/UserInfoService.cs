@@ -22,8 +22,11 @@ public partial class UserInfoService
         currentUser = user;
         if(user == null)
             return;
+        await Task.Run(() => info_flush());
+    }
 
-        switch (user!.accountType) {
+    async public void info_flush(){
+        switch (currentUser!.accountType) {
             case User.userType.normal:
                 await Task.Run(() => normal_user_flush());
                 break;
@@ -44,17 +47,21 @@ public partial class UserInfoService
 
     async public void normal_user_flush() {
         user_loans = await dbhelper.Db.Queryable<info_loan>()
+                    .Includes(x => x.item)
                     .Where(info => info.id_borrower == currentUser!.id && (!info.is_complete))
                     .ToListAsync();
 
         user_loses = await dbhelper.Db.Queryable<info_lose>()
+                    .Includes(x=> x.item)
                     .Where(info => info.id_borrower == currentUser!.id && (!info.is_complete))
                     .ToListAsync();
 
         user_reservations = await dbhelper.Db.Queryable<info_reservation>()
+                    .Includes(x => x.item)
                     .Where(info => info.id_borrower == currentUser!.id && (!info.is_complete))
                     .ToListAsync();
     }
+
     #endregion
 
     #region book_manager_info

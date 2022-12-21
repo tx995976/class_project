@@ -28,17 +28,20 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0" 
-                        Margin="50,0,0,50"
+                        Margin="50,70,0,50"
                         Orientation="Vertical"
                         HorizontalAlignment="Left" 
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Top">
                 <TextBlock Text="{Binding ViewModel.Ctitle.name, Mode=OneWay}" FontSize="16"/>
                 <TextBlock Text="{Binding ViewModel.Ctitle.author, Mode=OneWay}" FontSize="12"/>
+                <TextBlock Text="{Binding ViewModel.Reservation_snowid}" Width="auto" Margin="0,50,0,0"/>
             </StackPanel>
 
             <ui:Button Grid.Row="0" Grid.Column="1" 
                        Width="100" Height="60"
                        IsEnabled="{Binding ViewModel.Canreserve, Mode=OneWay}"
+                       Command="{Binding ViewModel.OnreservationCommand,Mode=OneWay}"
+                       CommandParameter="{Binding ViewModel.Ctitle.isbn}"
                        Content="预定" FontSize="14"
                        Background="#FF74ACE9"
                        HorizontalAlignment="Center" 

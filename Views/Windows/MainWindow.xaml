@@ -105,7 +105,7 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
-        <ui:Button Margin="805,-4,0,0" Height="30" Width="80" VerticalAlignment="Top" 
+        <ui:Button Margin="805,-4,0,0" Height="30" Width="auto" VerticalAlignment="Top" 
                    MinWidth="60"
                    Icon="Person24"
                    Content="{Binding ViewModel.Status_log}" 
