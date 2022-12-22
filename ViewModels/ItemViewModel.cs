@@ -31,8 +31,13 @@ public partial class ItemViewModel :ObservableObject , INavigationAware
     private ISugarQueryable<Models.item>? item_query;
 
     async public Task flush_item() {
+        Process_visible = Visibility.Visible;
         Items = await item_query!.ToListAsync();
+        Process_visible = Visibility.Collapsed;
     }
+
+     [ObservableProperty]
+    private Visibility _process_visible;
 
     #endregion
 
@@ -40,7 +45,9 @@ public partial class ItemViewModel :ObservableObject , INavigationAware
 
     [RelayCommand]
     private void Onadditem(){
-        App.GetService<ItemAddWindow>().Show();
+        var window = App.GetService<ItemAddWindow>();
+        window.Show();
+        window.ViewModel.Commit += itemadd_callback;
     }
 
     [RelayCommand]
@@ -49,6 +56,10 @@ public partial class ItemViewModel :ObservableObject , INavigationAware
         Services.delete_item((long)item_id);
         await Task.Run(() => flush_item());
     }
+
+    async private void itemadd_callback() =>
+        await Task.Run(() => flush_item());
+    
 
 
     #endregion

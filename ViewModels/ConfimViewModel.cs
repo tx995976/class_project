@@ -29,11 +29,16 @@ public partial class ConfimViewModel :ObservableObject , INavigationAware
 
     public List<Models.waiting_solve>? all_confims {get; set; }
 
+    [ObservableProperty]
+    private Visibility _process_visible;
+
     async public void flush_info(){
+        Process_visible = Visibility.Visible;
         var service = App.GetService<Services.UserInfoService>();
-        await Task.Run(() => service.book_user_flush());
+        await service.book_user_flush();
         all_confims = service.confims;
         Confims = all_confims;
+        Process_visible = Visibility.Collapsed;
     }
 
     public long stack_confim;
@@ -42,37 +47,44 @@ public partial class ConfimViewModel :ObservableObject , INavigationAware
     async private void Onconfimbutton(object id_solve){
         var service = App.GetService<Services.UserInfoService>();
         var confim = await service.get_confimAsync((long)id_solve);
-        
+        var selector = App.GetService<Views.Windows.TimeSelectWindow>();
+
         switch(confim!.type){
             case Models.waiting_solve.solve_type.reservation_to_loan:
                 stack_confim = (long)id_solve;
-                var selector = App.GetService<Views.Windows.TimeSelectWindow>();
                 selector.Show();
-                selector.ViewModel.selectend += Confim_loan;
+                selector.ViewModel.selectend += Commit_loan;
                 break;
             case Models.waiting_solve.solve_type.ext_loan:
+                stack_confim = (long)id_solve;
+                selector.Show();
+                selector.ViewModel.selectend += Commit_ext;
                 break;
             case Models.waiting_solve.solve_type.lose_solve:
+                Commit_lose((long)id_solve);
                 break;
             case Models.waiting_solve.solve_type.loan_end:
+                Commit_return((long)id_solve);
                 break;
         }
     }
 
-    async public void Confim_loan(DateTime end){
+    async public void Commit_loan(DateTime end){
         App.GetService<Services.BookService>().confim_loan(stack_confim,end);
         await Task.Run(() => flush_info());
     }
 
-    async public void Confim_ext(long id_solve){
+    async public void Commit_ext(DateTime end){
+        App.GetService<Services.BookService>().confim_ext(stack_confim,end);
         await Task.Run(() => flush_info());
     }
 
-    async public void Confim_lose(long id_solve){
+    async public void Commit_lose(long id_solve){
+        App.GetService<Services.BookService>().confim_lose(id_solve);
         await Task.Run(() => flush_info());
     }
 
-    async public void Confim_return(long id_solve){
+    async public void Commit_return(long id_solve){
         App.GetService<Services.BookService>().confim_return(id_solve);
         await Task.Run(() => flush_info());
     }

@@ -97,6 +97,12 @@ public partial class BookService
         item.loan!.is_complete = true;
         db.UpdateNav(item).Include(x => x.loan).ExecuteCommand();
 
+        var confim_return = db.Queryable<waiting_solve>()
+                            .Where(x => x.id_item == item_id && x.id_borrower == user!.id && !x.is_complete)
+                            .Single();
+        confim_return.is_complete = true;
+        db.Updateable(confim_return).ExecuteCommand();
+
         item.lose_id = snowid;
         item.loan_id = 0;
 
@@ -105,10 +111,8 @@ public partial class BookService
     }
 
     public void ext_new(long item_id){
-        var iuser = App.GetService<UserInfoService>();
         var db = dbhelper.Db;
 
-        var item = db.Queryable<item>().Includes(x => x.loan).InSingle(item_id);
         var confim = new waiting_solve(user!.id,item_id,waiting_solve.solve_type.ext_loan);
 
         db.Insertable(confim).ExecuteReturnSnowflakeId();
@@ -173,12 +177,18 @@ public partial class BookService
         var db = dbhelper.Db;
 
         var confim =  db.Queryable<waiting_solve>().InSingle(solve_id);
-        var item = db.Queryable<item>().Includes(x => x.lose).InSingle(confim.id_item);
+        var item = db.Queryable<item>()
+                        .Includes(x => x.lose)
+                        .Includes(x => x.title)
+                        .InSingle(confim.id_item);
 
         item.lose!.is_complete = true;
-        db.UpdateNav(item).Include(x => x.lose).ExecuteCommand();
+        item.title!.total_num -= 1;
+        db.UpdateNav(item).Include(x => x.lose).Include(x => x.title).ExecuteCommand();
         db.Deleteable(item).ExecuteCommand();
         
+        confim.is_complete = true;
+        db.Updateable(confim).ExecuteCommand();
     }
 
     public void confim_ext(long solve_id,DateTime end_date){

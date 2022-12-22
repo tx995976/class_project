@@ -45,6 +45,15 @@ public partial class ItemAddViewModel : ObservableObject
 
     #endregion
 
+    public Action? Commit;
+
+    public void clear_deleg(){
+        if(Commit is null)
+            return;
+        foreach(var it in Commit.GetInvocationList())
+            Commit -= it as Action;
+    }
+
     [RelayCommand]
     private void Check_title(){
         var bookservice = App.GetService<BookService>();
@@ -75,6 +84,9 @@ public partial class ItemAddViewModel : ObservableObject
         New_snowid = bookservice.add_item(item);
         Once_end = false;
         Check_res = "添加完成,数字id已生成";
+
+        Commit?.Invoke();
+        clear_deleg();
     }
 
     private void clear_info(){

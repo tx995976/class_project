@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System;
 
 using book_manager.Models;
+using System.Windows;
 
 namespace book_manager.ViewModels;
 
@@ -33,12 +34,17 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
     public IEnumerable<info_reservation>? _reserv;
 
     async public void flush_info(){
+        Process_visible = Visibility.Visible;
         var service = App.GetService<Services.UserInfoService>();
-        await Task.Run(() => service.normal_user_flush());
+        await service.normal_user_flush();
         Loans = service.user_loans;
         Loses = service.user_loses;
         Reserv = service.user_reservations;
+        Process_visible = Visibility.Collapsed;
     }
+
+    [ObservableProperty]
+    private Visibility _process_visible;
 
     #endregion
 

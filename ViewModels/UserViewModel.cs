@@ -28,9 +28,14 @@ public partial class UserViewModel :ObservableObject , INavigationAware
 
 
     async public Task flush_user() {
-       var service = App.GetService<Services.UserService>();
-       Users = await service.get_users();
+        Process_visible = Visibility.Visible;
+        var service = App.GetService<Services.UserService>();
+        Users = await service.get_users();
+        Process_visible = Visibility.Collapsed;
     }
+
+    [ObservableProperty]
+    private Visibility _process_visible;
 
     [RelayCommand]
     private void Onuseradd(){

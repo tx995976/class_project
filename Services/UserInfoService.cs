@@ -45,7 +45,7 @@ public partial class UserInfoService
     public List<info_lose>? user_loses { get; set; }
     public List<info_reservation>? user_reservations { get; set; }
 
-    async public void normal_user_flush() {
+    async public Task normal_user_flush() {
         user_loans = await dbhelper.Db.Queryable<info_loan>()
                     .Includes(x => x.item)
                     .Where(info => info.id_borrower == currentUser!.id && (!info.is_complete))
@@ -68,7 +68,7 @@ public partial class UserInfoService
 
     public List<waiting_solve>? confims { get; set; }
 
-    async public void book_user_flush() {
+    async public Task book_user_flush() {
         confims = await dbhelper.Db.Queryable<waiting_solve>()
                     .Where(x => !x.is_complete)
                     .ToListAsync();
@@ -84,7 +84,7 @@ public partial class UserInfoService
 
     public List<User>? users { get; set; }
 
-    async public void admin_user_flush() {
+    async public Task admin_user_flush() {
         users = await dbhelper.Db.Queryable<User>()
                 .Where(x => x.accountType != User.userType.system_manager)
                 .ToListAsync();

@@ -77,6 +77,11 @@
             </ItemsControl.ItemTemplate>
 
         </ui:VirtualizingGridView>
-
+        <ui:ProgressRing Margin="373,160,367,0" 
+                         Grid.Row="1" VerticalAlignment="Top" 
+                         Grid.ColumnSpan="2" IsIndeterminate="True" 
+                         Visibility="{Binding ViewModel.Process_visible}"/>  
+      
+      
     </Grid>
 </ui:UiPage>
