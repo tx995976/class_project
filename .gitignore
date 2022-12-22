@@ -1,6 +1,5 @@
 /.vs/**
 /.vscode/**
 /obj/**
-/Assets/**
 /bin/**
 /.code_cnt/**

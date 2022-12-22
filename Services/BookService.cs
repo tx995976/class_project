@@ -168,11 +168,17 @@ public partial class BookService
         db.Updateable<waiting_solve>(confim).ExecuteCommand();
     }
 
+    //丢失移除
     public void confim_lose(long solve_id){
         var db = dbhelper.Db;
 
         var confim =  db.Queryable<waiting_solve>().InSingle(solve_id);
+        var item = db.Queryable<item>().Includes(x => x.lose).InSingle(confim.id_item);
 
+        item.lose!.is_complete = true;
+        db.UpdateNav(item).Include(x => x.lose).ExecuteCommand();
+        db.Deleteable(item).ExecuteCommand();
+        
     }
 
     public void confim_ext(long solve_id,DateTime end_date){
@@ -180,10 +186,14 @@ public partial class BookService
 
         //execute
         var confim =  db.Queryable<waiting_solve>().InSingle(solve_id);
-        var item = db.Queryable<item>().Includes(x => x.reservation).InSingle(confim.id_item);
-        
+        var item = db.Queryable<item>().Includes(x => x.loan).InSingle(confim.id_item);
 
+        confim.is_complete = true;
+        db.Updateable(confim).ExecuteCommand();
 
+        item.loan!.end_date = end_date;
+        item.loan!.ext_num += 1;
+        db.UpdateNav(item).Include(x => x.loan).ExecuteCommand();
     }
 
 
