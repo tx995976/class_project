@@ -88,7 +88,7 @@ public partial class UserInfoService
         users = await dbhelper.Db.Queryable<User>()
                 .Where(x => x.accountType != User.userType.system_manager)
                 .ToListAsync();
-
+        
     }
 
     #endregion

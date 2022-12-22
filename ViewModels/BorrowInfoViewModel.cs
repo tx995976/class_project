@@ -4,7 +4,7 @@ using Wpf.Ui.Common.Interfaces;
 using SqlSugar;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
+using System;
 
 using book_manager.Models;
 
@@ -43,13 +43,17 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
     #endregion
 
     [RelayCommand]
-    private void Onext(object loan_id){
-
+    async private void Onext(object item_id){
+        App.GetService<Services.BookService>().ext_new((long)item_id);
+        await Task.Run(() =>flush_info());
     }
 
     [RelayCommand]
-    private void Onreportlose(object item_id){
-
+    async private void Onreportlose(object item_id){
+        App.GetService<Services.BookService>().lose_new((long)item_id);
+        await Task.Run(() =>flush_info());
     }
+
+   
 
 }

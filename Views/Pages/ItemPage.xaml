@@ -57,7 +57,7 @@
                             <StackPanel Orientation="Vertical" Margin="10,0">
                                 <TextBlock Text="{Binding item_id}" FontSize="14"/>
                                 <TextBlock Text="{Binding title.name}" FontSize="12"/>
-                            </StackPanel>
+                            </StackPanel>                            
                             <StackPanel Orientation="Vertical" Margin="300,0,0,0">
                                 <TextBlock Text="书本状态" FontSize="14" />
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource itemstaus}}" FontSize="12" />
