@@ -1,0 +1,13 @@
+<form class="login-form">
+    <div class="row">
+        <label>id:</label>
+        <input type="text" id="userid" [(ngModel)]="User.id" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="row">
+        <label>password:</label>
+        <input type="text" id="userpw" [(ngModel)]="User.password" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="row">
+        <button (click)="action_login()" [disabled]="!User.id">Login</button>
+      </div>
+</form>

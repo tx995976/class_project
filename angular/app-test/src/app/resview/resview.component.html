@@ -1,0 +1,29 @@
+<form>
+    <div>
+        <label class="normal_label">ws_url</label>
+        <input type="text" [(ngModel)]="url_ws" [ngModelOptions]="{standalone: true}">
+        <button (click)="action_openws()" [disabled]="!url_ws">open</button>
+        <button (click)="action_closews()" [disabled]="ws==undefined">close</button>
+    </div>
+</form>
+
+<div>
+    <label>正确率: </label>
+    <label>{{accept_ratio}}</label>
+</div>
+
+<div>
+    <table class="normal_tabel">
+        <tr>
+            <th>题目</th>
+            <th>回答</th>
+            <th>判断</th>
+        </tr>
+        <tr *ngFor="let info of array_res">
+            <td>{{info.question}}  </td>
+            <td>{{info.answer}}  </td>
+            <td>{{info.results}}  </td>
+        </tr>
+       
+    </table>
+</div>

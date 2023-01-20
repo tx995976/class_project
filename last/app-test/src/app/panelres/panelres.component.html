@@ -1,0 +1,38 @@
+<div>
+    <label>比赛规模: {{group_num}}小组 {{each_group}}成员</label>
+</div>
+
+<form class="froms" *ngIf="flag_groupinit">
+    <div>
+        <label>等级数</label>
+        <input [(ngModel)]="level" [ngModelOptions]="{standalone: true}">
+
+        <label>每级测试点数</label>
+        <input [(ngModel)]="each_level_case" [ngModelOptions]="{standalone: true}">
+
+        <label>测试点样例数</label>
+        <input [(ngModel)]="case_questions" [ngModelOptions]="{standalone: true}">
+        
+        <button [disabled]="level === 0 || each_level_case === 0 || case_questions === 0" (click)="init_questions()">生成题目</button>
+        <button [disabled]="!flag_groupinit || !flag_question " (click)="start_contest()">开始测试</button>
+        <button [disabled]="!flag_contest" (click)="stop_contest()">结束测试</button>
+        
+        
+    </div>
+    <div>
+        <label>当前比分: {{dashboard}}</label>
+
+    </div>
+</form>
+
+<form class="forms" *ngIf="flag_subinit">
+    <div *ngFor="let sub of subservers">
+        <app-resview 
+        [flag_question]="flag_question"
+        [group_num]="sub.group_num"
+        [seq_num]="sub.seq_num"
+        [level]="level"
+        [each_level_case]="each_level_case">
+        </app-resview>
+    </div>
+</form>
