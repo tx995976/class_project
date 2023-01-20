@@ -10,7 +10,7 @@ namespace book_manager.Services;
 
 public partial class UserService{
 
-    public User? currentUser { get; set;}
+    private User? currentUser { get; set;}
 
     public int login(string? username, string? password){
         var res = dbhelper.Db.Queryable<User>().Includes(x => x.student).InSingle(username);
@@ -58,6 +58,9 @@ public partial class UserService{
 
         
     }
+
+    public void add_user(){}
+    public void remove_user() {}
 
     #endregion
 

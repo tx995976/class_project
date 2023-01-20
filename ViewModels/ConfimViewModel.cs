@@ -9,7 +9,6 @@ using System;
 
 namespace book_manager.ViewModels;
 
-
 public partial class ConfimViewModel :ObservableObject , INavigationAware
 {
     public ConfimViewModel() {}

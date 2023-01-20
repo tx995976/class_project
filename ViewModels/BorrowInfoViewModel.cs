@@ -36,7 +36,7 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
     async public void flush_info(){
         Process_visible = Visibility.Visible;
         var service = App.GetService<Services.UserInfoService>();
-        await service.normal_user_flush();
+        await Task.Run(() => service.normal_user_flush());
         Loans = service.user_loans;
         Loses = service.user_loses;
         Reserv = service.user_reservations;
@@ -51,7 +51,7 @@ public partial class BorrowInfoViewModel :ObservableObject , INavigationAware
     [RelayCommand]
     async private void Onext(object item_id){
         App.GetService<Services.BookService>().ext_new((long)item_id);
-        await Task.Run(() =>flush_info());
+        await Task.Run(() => flush_info());
     }
 
     [RelayCommand]

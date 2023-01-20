@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="book_manager.Services.BookService">
+    <Position X="2.75" Y="1.75" Width="2" />
+    <Members>
+      <Method Name="BookService" Hidden="true" />
+      <Method Name="get_book_titles" Hidden="true" />
+      <Method Name="get_item" Hidden="true" />
+      <Method Name="get_items" Hidden="true" />
+      <Method Name="get_title" Hidden="true" />
+      <Property Name="user" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAGACEAQAAAIAggAGgAAEAAgAAAAEIgAAAQA=</HashCode>
+      <FileName>Services\BookService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Services.UserInfoService" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YIAAAAAAABAIAADAAAAQAAAAAAAAAAAAgAAEAAFAAAA=</HashCode>
+      <FileName>Services\UserInfoService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Services.UserService">
+    <Position X="0.5" Y="1.25" Width="2" />
+    <Members>
+      <Property Name="currentUser" Hidden="true" />
+      <Field Name="flush_user" Hidden="true" />
+      <Method Name="get_users" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>JAAAAAAAAAAAAgCQAAAAAAAAAgACAAAAAAAAAgAAEAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.Title" Collapsed="true">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAIAAAAIAgBAIAAAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\entity_book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.item" Collapsed="true">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAAAAAQEIAAAAAAAARABAAAAAAgAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Models\entity_book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.info_loan" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAEAIAIQQAACAAAEAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Models\entity_info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.info_lose" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAIAAQAAACAAAEAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\entity_info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.info_reservation" Collapsed="true">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQIAAQAAACAAAEAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\entity_info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.waiting_solve" Collapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAIAQAAAACEAAEBAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\entity_info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.Borrower" Collapsed="true">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAQAAAFAAAAAAAAAAAAIgA=</HashCode>
+      <FileName>Models\entity_user.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Models.User" Collapsed="true">
+    <Position X="8.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAEAAAAAAABAAAAAAAIASAAAAAAAAAkA=</HashCode>
+      <FileName>Models\entity_user.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_manager.Helpers.dbhelper" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAEAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\dbhelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="8.77" />
+</ClassDiagram>

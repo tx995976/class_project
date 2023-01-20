@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using Wpf.Ui.Common;
+// ReSharper disable All
 
 namespace book_manager.Helpers;
 
@@ -10,17 +11,13 @@ internal class Int2str : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if((long)value == 0)
-            return "";
-        return ((long)value).ToString();
+        return (long)value == 0 ? "" : ((long)value).ToString();
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var str = value as string;
-        if(str == "")
-            return 0;
-        return long.Parse(str!);
+        return str == "" ? 0 : long.Parse(str!);
     }
 
 }
